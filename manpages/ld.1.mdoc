@@ -1,0 +1,74 @@
+.Dd $Mdocdate: September 22 2015 $
+.Dt LD 1
+.Os
+.Sh NAME
+.Nm ld
+.Nd linker for binary object files
+.Sh DESCRIPTION
+Most importantly, the old description line
+.Dq Using LD, the GNU linker
+was completely bogus:
+.Bl -dash
+.It
+The word "using" is useless.
+It goes without saying that a manual page first and foremost intends
+to help with using a program; however, it may also help when changing
+or replacing the program.
+.It
+It is useless to repeat the name in the one-line description,
+and a particularly bad idea to vary the spelling in this place.
+.It
+The one-line description must never specify the source of the software.
+Such information belongs into the AUTHORS and HISTORY sections.
+.El
+.Pp
+What remains is just one single word,
+.Dq linker .
+While the one-line description should indeed be concise,
+it should also be clear.
+Even though it is not usually a complete sentence, having some
+kind of a predicate (which action is performed) and some kind of
+an object (what does the program operate on) is often helpful.
+.Pp
+When designing a one-line description, keep in mind that people
+often search for it with
+.Xr apropos 1 ,
+so try to include relevant search terms \(em of course, without
+making it sound awkward.
+For this reason,
+.Dq linker for binary object files
+is minimally better than
+.Dq link binary object files
+because people might search for both
+.Dq link
+or
+.Dq linker .
+While
+.Dq binary object files
+might seem slightly redundant, it is arguably better than just
+.Dq object files
+for the same reason, and because it avoids the inherent ambiguity
+of the term
+.Dq object .
+.Pp
+Time spent polishing the one-line description to be as descriptive
+and concise as possible is almost always well spent.
+It is the very first thing people see of the manual page,
+and in the context of
+.Xr apropos 1 ,
+it's all people have to judge whether that's the page they want to read.
+.Pp
+Also note the following details:
+.Bl -dash
+.It
+The date format changes.
+.It
+A source string like
+.Qq binutils-2.17
+is no longer needed.
+.It
+The volume string cannot be overridden, no replacement is needed for
+.Qq GNU Development Tools .
+.It
+Section headers need no quoting.
+.El

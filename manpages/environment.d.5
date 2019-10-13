@@ -1,0 +1,126 @@
+'\" t
+.TH "ENVIRONMENT\&.D" "5" "" "systemd 243" "environment.d"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+environment.d \- Definition of user session environment
+.SH "SYNOPSIS"
+.PP
+~/\&.config/environment\&.d/*\&.conf
+.PP
+/etc/environment\&.d/*\&.conf
+.PP
+/run/environment\&.d/*\&.conf
+.PP
+/usr/lib/environment\&.d/*\&.conf
+.PP
+/etc/environment
+.SH "DESCRIPTION"
+.PP
+The
+environment\&.d
+directories contain a list of "global" environment variable assignments for the user environment\&.
+\fBsystemd-environment-d-generator\fR(8)
+parses them and updates the environment exported by the systemd user instance to the services it starts\&.
+.PP
+It is recommended to use numerical prefixes for file names to simplify ordering\&.
+.PP
+For backwards compatibility, a symlink to
+/etc/environment
+is installed, so this file is also parsed\&.
+.SH "CONFIGURATION DIRECTORIES AND PRECEDENCE"
+.PP
+Configuration files are read from directories in
+/etc/,
+/run/,
+/usr/local/lib/, and
+/usr/lib/, in order of precedence\&. Each configuration file in these configuration directories shall be named in the style of
+\fIfilename\fR\&.conf\&. Files in
+/etc/
+override files with the same name in
+/run/,
+/usr/local/lib/, and
+/usr/lib/\&. Files in
+/run/
+override files with the same name under
+/usr/\&.
+.PP
+Packages should install their configuration files in
+/usr/lib/
+(distribution packages) or
+/usr/local/lib/
+(local installs)\&. Files in
+/etc/
+are reserved for the local administrator, who may use this logic to override the configuration files installed by vendor packages\&. All configuration files are sorted by their filename in lexicographic order, regardless of which of the directories they reside in\&. If multiple files specify the same option, the entry in the file with the lexicographically latest name will take precedence\&. It is recommended to prefix all filenames with a two\-digit number and a dash, to simplify the ordering of the files\&.
+.PP
+If the administrator wants to disable a configuration file supplied by the vendor, the recommended way is to place a symlink to
+/dev/null
+in the configuration directory in
+/etc/, with the same filename as the vendor configuration file\&. If the vendor configuration file is included in the initrd image, the image has to be regenerated\&.
+.SH "CONFIGURATION FORMAT"
+.PP
+The configuration files contain a list of
+"\fIKEY\fR=\fIVALUE\fR"
+environment variable assignments, separated by newlines\&. The right hand side of these assignments may reference previously defined environment variables, using the
+"${OTHER_KEY}"
+and
+"$OTHER_KEY"
+format\&. It is also possible to use
+"${\fIFOO\fR:\-\fIDEFAULT_VALUE\fR}"
+to expand in the same way as
+"${\fIFOO\fR}"
+unless the expansion would be empty, in which case it expands to
+\fIDEFAULT_VALUE\fR, and use
+"${\fIFOO\fR:+\fIALTERNATE_VALUE\fR}"
+to expand to
+\fIALTERNATE_VALUE\fR
+as long as
+"${\fIFOO\fR}"
+would have expanded to a non\-empty value\&. No other elements of shell syntax are supported\&.
+.PP
+Each
+\fIKEY\fR
+must be a valid variable name\&. Empty lines and lines beginning with the comment character
+"#"
+are ignored\&.
+.SS "Example"
+.PP
+\fBExample\ \&1.\ \&Setup environment to allow access to a program installed in /opt/foo\fR
+.PP
+/etc/environment\&.d/60\-foo\&.conf:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+        FOO_DEBUG=force\-software\-gl,log\-verbose
+        PATH=/opt/foo/bin:$PATH
+        LD_LIBRARY_PATH=/opt/foo/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+        XDG_DATA_DIRS=/opt/foo/share:${XDG_DATA_DIRS:\-/usr/local/share/:/usr/share/}
+        
+.fi
+.if n \{\
+.RE
+.\}
+.SH "SEE ALSO"
+.PP
+\fBsystemd\fR(1),
+\fBsystemd-environment-d-generator\fR(8),
+\fBsystemd.environment-generator\fR(7)

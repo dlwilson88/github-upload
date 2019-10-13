@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="/mandoc.css" type="text/css" media="all"/>
+  <title>LD(1)</title>
+</head>
+<body>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">LD(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">LD(1)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<h1 class="Sh" title="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm" title="Nm">ld</code> &#x2014;
+<div class="Nd" title="Nd">linker for binary object files</div>
+<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+Most importantly, the old description line &#x201C;Using LD, the GNU
+  linker&#x201D; was completely bogus:
+<ul class="Bl-dash">
+  <li>The word &quot;using&quot; is useless. It goes without saying that a
+      manual page first and foremost intends to help with using a program;
+      however, it may also help when changing or replacing the program.</li>
+  <li>It is useless to repeat the name in the one-line description, and a
+      particularly bad idea to vary the spelling in this place.</li>
+  <li>The one-line description must never specify the source of the software.
+      Such information belongs into the AUTHORS and HISTORY sections.</li>
+</ul>
+<div class="Pp"></div>
+What remains is just one single word, &#x201C;linker&#x201D;. While the one-line
+  description should indeed be concise, it should also be clear. Even though it
+  is not usually a complete sentence, having some kind of a predicate (which
+  action is performed) and some kind of an object (what does the program operate
+  on) is often helpful.
+<div class="Pp"></div>
+When designing a one-line description, keep in mind that people often search for
+  it with
+  <a class="Xr" title="Xr" href="http://man.openbsd.org/apropos.1">apropos(1)</a>,
+  so try to include relevant search terms &#x2014; of course, without making it
+  sound awkward. For this reason, &#x201C;linker for binary object files&#x201D;
+  is minimally better than &#x201C;link binary object files&#x201D; because
+  people might search for both &#x201C;link&#x201D; or &#x201C;linker&#x201D;.
+  While &#x201C;binary object files&#x201D; might seem slightly redundant, it is
+  arguably better than just &#x201C;object files&#x201D; for the same reason,
+  and because it avoids the inherent ambiguity of the term
+  &#x201C;object&#x201D;.
+<div class="Pp"></div>
+Time spent polishing the one-line description to be as descriptive and concise
+  as possible is almost always well spent. It is the very first thing people see
+  of the manual page, and in the context of
+  <a class="Xr" title="Xr" href="http://man.openbsd.org/apropos.1">apropos(1)</a>,
+  it's all people have to judge whether that's the page they want to read.
+<div class="Pp"></div>
+Also note the following details:
+<ul class="Bl-dash">
+  <li>The date format changes.</li>
+  <li>A source string like &#x201C;binutils-2.17&#x201D; is no longer
+    needed.</li>
+  <li>The volume string cannot be overridden, no replacement is needed for
+      &#x201C;GNU Development Tools&#x201D;.</li>
+  <li>Section headers need no quoting.</li>
+</ul>
+</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">September 22, 2015</td>
+    <td class="foot-os">bsd.lv</td>
+  </tr>
+</table>
+</body>
+</html>

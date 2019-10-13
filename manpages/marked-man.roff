@@ -1,0 +1,52 @@
+MARKED-MAN(1)                                                    MARKED-MAN(1)
+
+
+
+[1mNAME[0m
+       [1mmarked-man [22m- markdown to roff
+
+[1mSYNOPSIS[0m
+         marked-man README.md > doc/marked-man.1
+
+       See  marked  README  [4mhttps://github.com/chjj/marked[24m  for  documentation
+       about how to use marked.
+
+       Note that [1mmarked-man --format=html [22mis the same as [1mmarked[22m.
+
+[1mDESCRIPTION[0m
+       [1mmarked-man [22mwraps [1mmarked [22mto extend it with groff output support.
+
+[1mOPTIONS[0m
+       [1mmarked-man [22madds some options to [1mmarked [22mexisting options:
+
+       +o format Sets the output format. Outputs html if different  from  [1mroff[22m.
+         Defaults to [1mroff[22m.
+
+       +o name  The  name shown in the manpage header, if it isn't given in the
+         ronn header like in this README.  Defaults to empty string.
+
+       +o section The section shown in the manpage header, if it isn't given in
+         the ronn header like in this README.  Defaults to empty string.
+
+       +o version  The  version shown in the manpage header.  Defaults to empty
+         string.
+
+       +o manual The MANUAL string shown in the manpage  header.   Defaults  to
+         empty string.
+
+       +o date  The date shown in the manpage header.  Defaults to now, must be
+         acceptable by new Date(string).
+
+
+       [1mmarked-man [22minvokes [1mmarked --gfm --sanitize[22m.  The --breaks option can be
+       helpful to match default [1mronn [22mbehavior.
+
+[1mSEE ALSO[0m
+       Ryan Tomayko [4mhttps://github.com/rtomayko/ronn[0m
+
+[1mREPORTING BUGS[0m
+       See marked-man repository [4mhttps://github.com/kapouer/marked-man[24m.
+
+
+
+                                 January 2014                    MARKED-MAN(1)
